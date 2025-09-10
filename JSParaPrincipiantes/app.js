@@ -1,5 +1,9 @@
- console.log ("this is a string ")
-  console.log (14.7)
-  console.log(true)
-  console.log([1,2,3])
+ var nameuser = "John";
+ let lastname ="caracter";
+
+ nameuser ='pepe';
+ console.log(nameuser)
  
+const PI=3.1415
+PI= 100;
+console.log(PI)
