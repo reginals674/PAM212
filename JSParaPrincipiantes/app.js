@@ -1,9 +1,5 @@
-document.write ("<h1>Hello world</h1>");
- console.log ("Hello world")
- console.error ("mi error customatizado")
- console.error("La aplicación ha fallado")
-
-  //tipos de datos
-  "hello world"//string 
-  'hello world'//string
-
+ console.log ("this is a string ")
+  console.log (14.7)
+  console.log(true)
+  console.log([1,2,3])
+ 
