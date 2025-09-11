@@ -1,17 +1,39 @@
-// creacion de variables
- var nameuser = "John";
- let lastname ="caracter";
+//suma
+let numberOne= 60;
+let numberTwo= 100;
 
-//reasignacion del valor de la variable nameuser
- nameuser ='pepe';
- console.log(nameuser)
+let result = numberOne+numberTwo;
 
-//creacion de una constante y el no poder reasignar valores
-const PI=3.1415
-PI= 100;
-console.log(PI)
+result = numberOne-numberTwo;
+result = numberOne*numberTwo;
+result = numberOne/numberTwo;
 
-/*otra 
-variable 
-definida*/
-let userName = 'gordon';
+console.log(result);
+
+//concatenación 
+let name ='John';
+let lastname = 'Carter';
+
+let completeName = name + ' ' + lastname;
+console.log(completeName);
+
+//comparación 
+
+numberOne=100;
+numberTwo=500;
+
+
+result = numberOne > numberTwo;
+
+result = numberOne == numberTwo;
+
+numberTwo = 100;
+
+result = numberOne == numberTwo;
+result = numberOne != numberTwo;
+
+
+numberTwo = 500;
+result = numberOne != numberTwo;
+
+console.log(result);
