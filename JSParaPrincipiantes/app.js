@@ -1,26 +1,12 @@
-let passwordDB='pepe123';
-let input = 'ahuidiu';
-
-let result = input == passwordDB;
-
-if(result == true){
-    console.log('Login Correcto');
-}else{
-    console.log('Contraseña Incorrecto');
-}
-
-
-
-let score =70;
-
-if (score>30){
-    console.log ("Necesitas practicar más")
-}
-else if(score>15){
-    console.log('Estas mejorando');
-}
-    
-else{
-    console.log("Necesitas consultar este tutorial");
-
+let typeCard= 'Credit card';
+switch(typeCard){
+    case 'Debit card':
+        console.log('this is a debit card');
+        break;
+    case 'Credit card':
+        console.log('this is a credit card'); 
+        break;
+        default:
+        console.log('No card');
+        break;
 }
