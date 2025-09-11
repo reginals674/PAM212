@@ -1,39 +1,26 @@
-//suma
-let numberOne= 60;
-let numberTwo= 100;
+let passwordDB='pepe123';
+let input = 'ahuidiu';
 
-let result = numberOne+numberTwo;
+let result = input == passwordDB;
 
-result = numberOne-numberTwo;
-result = numberOne*numberTwo;
-result = numberOne/numberTwo;
-
-console.log(result);
-
-//concatenación 
-let name ='John';
-let lastname = 'Carter';
-
-let completeName = name + ' ' + lastname;
-console.log(completeName);
-
-//comparación 
-
-numberOne=100;
-numberTwo=500;
+if(result == true){
+    console.log('Login Correcto');
+}else{
+    console.log('Contraseña Incorrecto');
+}
 
 
-result = numberOne > numberTwo;
 
-result = numberOne == numberTwo;
+let score =70;
 
-numberTwo = 100;
+if (score>30){
+    console.log ("Necesitas practicar más")
+}
+else if(score>15){
+    console.log('Estas mejorando');
+}
+    
+else{
+    console.log("Necesitas consultar este tutorial");
 
-result = numberOne == numberTwo;
-result = numberOne != numberTwo;
-
-
-numberTwo = 500;
-result = numberOne != numberTwo;
-
-console.log(result);
+}
