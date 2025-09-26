@@ -1,7 +1,17 @@
 
-import {restar} from './utils.js';
+function verificarUsuario(usuario) {
+    return new Promise((resolve, reject) => {
+        if (usuario=="admin" ) {
+            resolve("Usuario verificado");
+        } else {
+            reject("Usuario no verificado");
+        }           
+    });
+}
+verificarUsuario("admin")
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
 
-console.log(restar(5,2));  
-console.log(restar(20,3));  
-console.log(restar(9,8));  
-console.log(restar(10,4));  
+verificarUsuario("Regina")
+    .then(res => console.log(res))
+    .catch(err => console.log(err));    
