@@ -2,6 +2,8 @@ import { Text, StyleSheet, View, Button } from 'react-native'
 import React, { useState } from 'react'
 import ContadorScreen from './ContadorScreen';
 import BotonesScreen from './BotonesScreen';
+import ScrollViewScreen from './ScrollViewScreen';
+
 
 
 export default function MenuScreen() {
@@ -13,6 +15,9 @@ export default function MenuScreen() {
             return <ContadorScreen/>
         case'botones':
             return <BotonesScreen/>
+        case 'scroll':
+            return <ScrollViewScreen />;
+
         case 'menu':
             default:
                 return (
@@ -24,7 +29,7 @@ export default function MenuScreen() {
                             <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: Botones' />
                             <Button color='#388892ff'onPress={()=>setScreen('botones')} title = 'Pract: TextInput'/>
                             <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: ImageBackgroung' />
-                            <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: ScrollView' />
+                            <Button color='#388892ff' onPress={()=>setScreen('scroll')} title = 'Pract: ScrollView' />
                             <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: Activity Indicator' />
                             <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: FlatList' />
                             <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: Modal'/>
