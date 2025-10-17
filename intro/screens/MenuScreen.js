@@ -9,6 +9,7 @@ import ModalScreen from './ModalScreen';
 import BottomSheetScreen from './BottomSeetScreen';  
 import ImageBackgroundScreen from './ImageBackgroungScreen';
 import TextInputScreen from './TextInputScreen';  
+import BotonScreen from './Botones/BotonScreen';
 
 
 
@@ -21,6 +22,8 @@ export default function MenuScreen() {
         case 'contador':
             return <ContadorScreen/>
         case'botones':
+            return <BotonScreen/>
+        case'botonessw':
             return <BotonesScreen/>
         case 'scroll':
             return <ScrollViewScreen />;
@@ -46,7 +49,9 @@ export default function MenuScreen() {
                     
                         <View style={styles.contenedorBotones}>
                             <Button color='#388892ff' onPress={()=>setScreen('contador')} title = 'Pract: Contador'/>
-                            <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: Botones' />
+                            <Button color='#388892ff' onPress={()=>setScreen('botonessw')} title = 'Pract: Botones:switch' />
+                            <Button color='#388892ff' onPress={()=>setScreen('botones')} title = 'Pract: Botones:botones' />
+                            
                             <Button color='#388892ff'onPress={()=>setScreen('text')} title = 'Pract: TextInput'/>
                             <Button color='#388892ff' onPress={()=>setScreen('image')} title = 'Pract: ImageBackgroung' />
                             <Button color='#388892ff' onPress={()=>setScreen('scroll')} title = 'Pract: ScrollView' />

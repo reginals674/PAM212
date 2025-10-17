@@ -64,6 +64,10 @@ export default function BotonesScreen() {
         {/* Texto adicional, podría ser un footer o nota */}
         <Text> Configuración </Text>
       </View>
+
+      <view>
+        
+      </view>
     </View>
   )
 }
