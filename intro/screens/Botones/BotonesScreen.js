@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View } from 'react-native'
-import SwitchButton from './SwitchScreen'
+import SwitchButton from './Switch'
 
 
 export default function BotonesScreen() {
