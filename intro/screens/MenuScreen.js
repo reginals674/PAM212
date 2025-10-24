@@ -10,6 +10,7 @@ import BottomSheetScreen from './BottomSeetScreen';
 import ImageBackgroundScreen from './ImageBackgroungScreen';
 import TextInputScreen from './TextInputScreen';  
 import BotonScreen from './Botones/BotonScreen';
+import RepasoScreen from './RepasoScreen';
 
 
 
@@ -39,6 +40,8 @@ export default function MenuScreen() {
             return <BottomSeetScreen />;   
         case 'text':
             return <TextInputScreen />;
+        case 'repaso':
+            return <RepasoScreen/>;
         
 
         case 'menu':
@@ -59,6 +62,8 @@ export default function MenuScreen() {
                             <Button color='#388892ff' onPress={()=>setScreen('flatlist')} title = 'Pract: FlatList' />
                             <Button color='#388892ff' onPress={()=>setScreen('modal')} title = 'Pract: Modal'/>
                             <Button color='#388892ff' onPress={()=>setScreen('bottomSeet')} title = 'Pract: BottomSeet'/>
+
+                            <Button color='#388892ff' onPress={()=>setScreen('repaso')} title = 'Pract: Repaso 1'/>
                         </View>
                     
                     </View>
