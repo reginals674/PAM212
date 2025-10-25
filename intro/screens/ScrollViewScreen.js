@@ -1,58 +1,80 @@
-// screens/ScrollViewScreen.js
-import React, { useRef } from 'react';
-import { View, Animated, ScrollView, Text, StyleSheet, Button } from 'react-native';
+import React from 'react';
+import { ScrollView, StyleSheet, Text, View} from 'react-native-web';
 
-export default function ScrollViewScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+const DATA = [
+ {id:1},
+ {id:2},
+ {id:3},
+ {id:4},
+ {id:5},
+ {id:6},
+ {id:7},
+ {id:8},
+ {id:9},
+ {id:10},
+]; 
 
+const SimpleHeader = () => {
   return (
-    <View style={styles.container}>
-      <Animated.View
-        style={[
-          styles.header,
-          {
-            height: scrollY.interpolate({
-              inputRange: [0, 100],
-              outputRange: [200, 80],
-              extrapolate: 'clamp',
-            }),
-          },
-        ]}
-      >
-        <Text style={styles.title}>Ejemplo ScrollView</Text>
-      </Animated.View>
-
-      <ScrollView
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-      >
-        {[...Array(15)].map((_, i) => (
-          <View key={i} style={styles.card}>
-            <Text style={styles.text}>Elemento {i + 1}</Text>
-          </View>
-        ))}
-      </ScrollView>
-
+    <View style ={styles.header}>
+      <Text style={styles.title}>ScrollView Horizontal</Text>
     </View>
   );
-}
+};
+
+const SimpleScrollView = () => {
+  return (
+    <View style= {styles.container}>
+      <SimpleHeader/>
+      <ScrollView 
+      horizontal={true}
+      showHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContent}
+      >
+        {DATA.map(val => {
+          return (
+            <View style={styles.card} key = {val.id}>
+              <Text style={styles.subtitle}> ¡Soy una tarjeta!</Text>
+            </View>
+          );
+        })}
+    </ScrollView>
+  </View>
+  );
+};
+
+export default SimpleScrollView;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: {
+    flex: 1,
+  },
   header: {
-    backgroundColor: '#3498db',
+    height: 120,
+    backgroundColor: '#181D31',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 25,
   },
-  title: { color: '#fff', fontSize: 22, fontWeight: 'bold', paddingTop: 30 },
+  title: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  scrollContent: {
+    paddingVertical: 10,
+  },
   card: {
-    margin: 10,
-    padding: 20,
-    backgroundColor: '#eee',
-    borderRadius: 8,
+    width: 100,
+    height: 150,
+    backgroundColor: '#E6DDC4',
+    marginLeft: 10, 
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
   },
-  text: { fontSize: 16 },
+  subtitle: {
+    color: '#181D31',
+    fontWeight: 'bold',
+  },
 });
