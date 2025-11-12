@@ -6,7 +6,7 @@ import ScrollViewScreen from './ScrollViewScreen';
 import ActivityIndicatorScreen from './ActivityIndicatorScreen';
 import FlatListScreen from './FlatListScreen';
 import ModalScreen from './ModalScreen';
-import BottomSheetScreen from './BottomSeetScreen';  
+import BottomSeetScreen from './BottomSeetScreen';
 import ImageBackgroundScreen from './ImageBackgroungScreen';
 import TextInputScreen from './TextInputScreen';  
 import BotonScreen from './Botones/BotonScreen';
@@ -37,7 +37,7 @@ export default function MenuScreen() {
         case 'modal':
             return <ModalScreen />;
         case 'bottomsheet':
-            return <BottomSeetScreen />;   
+            return <BottomSeetScreen/>;   
         case 'text':
             return <TextInputScreen />;
         case 'repaso':
@@ -61,7 +61,7 @@ export default function MenuScreen() {
                             <Button color='#388892ff' onPress={()=>setScreen('activity')} title = 'Pract: Activity Indicator' />
                             <Button color='#388892ff' onPress={()=>setScreen('flatlist')} title = 'Pract: FlatList' />
                             <Button color='#388892ff' onPress={()=>setScreen('modal')} title = 'Pract: Modal'/>
-                            <Button color='#388892ff' onPress={()=>setScreen('bottomSeet')} title = 'Pract: BottomSeet'/>
+                            <Button color='#388892ff' onPress={()=>setScreen('bottomsheet')} title = 'Pract: BottomSeet'/>
 
                             <Button color='#388892ff' onPress={()=>setScreen('repaso')} title = 'Pract: Repaso 1'/>
                         </View>
