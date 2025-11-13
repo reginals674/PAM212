@@ -14,7 +14,7 @@ export default function modalscreen(){
 
   return(
     <View style= {styles.container}>
-      <Text style={styles.tittle}>Ejemplo del compoonenete Modal</Text>
+      <Text style={styles.title}>Ejemplo del componenete Modal</Text>
 
       <Button title="Abrir modal" onPress={abrirModal}/>
 

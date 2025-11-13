@@ -37,12 +37,12 @@ export default function BottomSeetScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#3d3535ff",
+    backgroundColor: "#6490d1ff",
     alignItems: "center",
     justifyContent: "center",
   },
   BSheet: {
-    backgroundColor: '#e7dedeff'
+    backgroundColor: '#cefffdff'
   },
   BView:{
     flex:1,
