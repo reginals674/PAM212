@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet, Alert,ActivityIndicator,Platform,Modal } from 'react-native';
 import { UsuarioController } from '../controllers/UsuarioController'; 
+import { Ionicons } from '@expo/vector-icons';
 
 const controller = new UsuarioController();
 
@@ -12,14 +13,19 @@ export default function InsertUsuarioScreen() {
   const [loading, setLoading] = useState(true);
   const [guardando, setGuardando] = useState(false);
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [usuarioEditando, setUsuarioEditando] = useState(null);
+  const [nombreEditado,setNombreEditado]=useState('');
+
+
   const cargarUsuarios = useCallback(async () => {
     try {
       setLoading(true);
       const data = await controller.obtenerUsuarios();
       setUsuarios(data);
-      console.log('${data} Usuarios cargados:');
+      console.log('${data.length} Usuarios cargados:');
     } catch (error) {
-      Alert.alert('Error', + error.message);
+      Alert.alert('Error', error.message);
     } finally {
       setLoading(false);
     }
@@ -37,20 +43,70 @@ export default function InsertUsuarioScreen() {
   }, [cargarUsuarios]);
 
   const handleAgregar = async () => {
-     if(guardando) return;
+     if(guardando || !nombre.trim()) return;
     try {
       setGuardando(true);
-      const usuarioCreado = await controller.crearUsuario(nombre);
-      
+      const usuarioCreado= await controller.crearUsuario(nombre.trim());
+      setNombre('');
+
       Alert.alert( 'Usuario creado', `"${usuarioCreado.nombre}" guardado con ID: ${usuarioCreado.id}`);
 
-      setNombre('');
+      
     }
     catch (error) {
       Alert.alert('Error', error.message);
     } finally {
       setGuardando(false);
     }
+  };
+
+  const abrirModalActualizar =(usuario) =>{
+     setUsuarioEditando(usuario);
+     setNombreEditado(usuario.nombre);
+     setModalVisible(true);
+  };
+
+  const cerrarModal =()=>{
+    setModalVisible(false);
+    setUsuarioEditando(null);
+    setNombreEditado('');
+  }
+
+  const handleActualizar = async () => {
+    if (guardando || !nombreEditado.trim() || !usuarioEditando) return;
+    try {
+      setGuardando(true);
+      await controller.actualizarUsuario(usuarioEditando.id, nombreEditado.trim());
+      setModalVisible(false);
+      setUsuarioEditando(null);
+      setNombreEditado('');
+
+      Alert.alert('USUARIO ACTUALIZADO CORRECTAMENTE');
+
+    }catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setGuardando(false);
+    }
+  };
+
+  const handleEliminar = async (id, nombreUsuario) => {
+    Alert.alert(
+      'Confirmar eliminación',
+      '¿Estás seguro de que deseas eliminar este usuario?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        { text: 'Eliminar', style: 'destructive', onPress: async () => {
+            try {
+              await controller.eliminarUsuario(id); 
+              Alert.alert('Usuario eliminado' );   
+            } catch (error) {
+              Alert.alert('Error', error.message);
+            }
+          }
+        }
+      ]
+    );
   };
 
   const renderUsuario = ({item, index}) => (
@@ -68,6 +124,15 @@ export default function InsertUsuarioScreen() {
             day: 'numeric',
           })}
         </Text>
+      </View>
+      <View style = {styles.opc}>
+        <TouchableOpacity onPress={()=>handleEliminar(item.id,item.nombre)}>
+          <Ionicons name="trash" size={24} color="#FF3B30" />
+
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => abrirModalActualizar(item)}>
+          <Ionicons name="pencil" size={24} color="#007AFF" />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -149,6 +214,40 @@ export default function InsertUsuarioScreen() {
 
 
       </View>
+
+      <Modal
+        visible={modalVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={cerrarModal}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Actualizar Usuario</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Escribe el nuevo nombre del usuario"
+              value={nombreEditado}
+              onChangeText={setNombreEditado}
+              
+              
+              
+            />
+            <View style={styles.modalButtons}>
+            <TouchableOpacity style= {styles.buttonM}onPress={cerrarModal} >
+              <Ionicons name='close-circle' size={24} color="#b85656ff"/>
+              <Text style={styles.textM}>CANCELAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style= {styles.buttonM} onPress={handleActualizar} >
+              <Ionicons name='checkmark-circle' size={24} color="#59d355ff"/>
+              <Text style={styles.textM}>ACTUALIZAR</Text>
+            </TouchableOpacity>
+          </View>
+            
+          </View>
+          
+        </View>
+      </Modal>  
 
 
     </View>
@@ -334,4 +433,56 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1976D2',
   },
+
+  modalContainer:{
+    flex: 1,
+    justifyContent:'center',
+    alignItems:'center',
+    padding: 20,
+
+  },
+  modalContent:{
+    borderRadius:12,
+    backgroundColor: '#d8dadbff',
+    padding: 20,
+    shadowColor:"#000",
+    width: '100%'
+  },
+  modalTitle:{
+   
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#1976D2',
+    marginBottom: 8,
+    
+  
+  },
+  modalButtons:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    gap:10
+  },
+  buttonM:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    gap:40,
+    backgroundColor: '#f5f5f5',
+    borderRadius:10,
+    width: '50%',
+    justifyContent:'center',
+    alignItems:'center',
+    padding:7,
+    
+  },
+  textM:{
+    flex:1,
+
+
+  },
+   opc:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    gap:15
+   }
 });

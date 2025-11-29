@@ -53,6 +53,42 @@ class DatabaseService {
         }
     }
 
+    async actualizar (id, nombre) {
+        if (Platform.OS ==='web') {
+            const usuarios = await this.getAll();
+            const index = usuarios.findIndex(u => u.id === id);
+            if (index !== -1) {
+                usuarios[index].nombre = nombre;
+               
+                localStorage.setItem(this.storageKey, JSON.stringify(usuarios));
+                return usuarios[index];
+            }else {
+                throw new Error('Usuario no encontrado');
+            }
+        }else {
+            await this.db.runAsync(
+                'UPDATE usuarios SET nombre = ? WHERE id = ?;',
+                [nombre, id]
+            );
+            const result =await this.db.getFirstAsync('SELECT * FROM usuarios WHERE id = ?;', id);
+            return result;
+        }
+    }
+    async eliminar (id) {
+        if (Platform.OS ==='web') {
+            const usuarios = await this.getAll();
+            const nuevosUsuarios = usuarios.filter(u => u.id !== id);
+            localStorage.setItem(this.storageKey, JSON.stringify(nuevosUsuarios));
+            return id;
+        }else {
+            await this.db.runAsync(
+                'DELETE FROM usuarios WHERE id = ?;',
+                id
+            );
+            return id;
+        }
+    }
+
 }
 
 
